@@ -1,27 +1,27 @@
 package com.project.dairy_management_system.Entity;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
 @Setter
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
-@Table(name= "inventory")
-public class Item {
+@AllArgsConstructor
+public class Users {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Item Name")
-    private String itemName;
-
-    @Column(name="Item Quantity")
-    private String itemQty;
-
+    private String username;
+    private String password;
+    private String userRole;
 }
