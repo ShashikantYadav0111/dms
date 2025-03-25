@@ -1,16 +1,14 @@
 package com.project.dairy_management_system.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name="customers")
 public class Customer {
 
@@ -29,8 +27,6 @@ public class Customer {
 
     @Column(name="phoneNo")
     private String phoneNo;
-
-
 
 
 }
