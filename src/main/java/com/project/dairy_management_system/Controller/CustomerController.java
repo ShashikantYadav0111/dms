@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("customer")
 public class CustomerController {
