@@ -2,6 +2,10 @@ package com.project.dairy_management_system.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Setter
@@ -14,19 +18,37 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "customer_id")
+    private Long customerId;
 
-    @Column(name="firstName")
+    @Column(nullable = false)
     private String firstName;
 
-    @Column(name="lastName")
+    @Column(nullable = false)
     private String lastName;
 
-    @Column(name="address")
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password; // Will be hashed
+
+    @Column(unique = true)
+    private String phoneNo;
+
+    @Column(unique = true)
     private String address;
 
-    @Column(name="phoneNo")
-    private String phoneNo;
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Cart cart;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
 
 
 }

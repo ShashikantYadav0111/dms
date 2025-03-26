@@ -8,12 +8,11 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
     @Mapping(target = "fullName",expression = "java(customer.getFirstName() +\" \"+ customer.getLastName())")
-    @Mapping(target = "customerId",source = "id")
+    @Mapping(target = "customerId",source = "customerId")
     CustomerDto toDto(Customer customer);
 
-    @Mapping(target = "firstName",expression = "java(dto.getFullName().split(\" \")[0])")
-    @Mapping(target = "lastName",expression = "java(dto.getFullName().split(\" \")[1])")
-    @Mapping(target = "id",source = "customerId")
+    @Mapping(target = "firstName",expression = "java(dto.fullName().split(\" \")[0])")
+    @Mapping(target = "lastName",expression = "java(dto.fullName().split(\" \")[1])")
     Customer toEntity(CustomerDto dto);
 
 }

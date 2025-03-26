@@ -3,6 +3,7 @@ package com.project.dairy_management_system.Controller;
 import com.project.dairy_management_system.Entity.Customer;
 import com.project.dairy_management_system.Service.Customer.CustomerService;
 import com.project.dairy_management_system.dto.CustomerDto;
+import com.project.dairy_management_system.dto.CustomerRegister;
 import com.project.dairy_management_system.mapper.CustomerMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +24,27 @@ public class CustomerController {
     private CustomerMapper mapper;
 
     @PostMapping("/add")
-    public ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerDto dto){
-        return new ResponseEntity<>(customerService.addCustomer(dto),HttpStatus.CREATED);
+    public ResponseEntity<CustomerDto> addCustomer(@RequestBody CustomerRegister register){
+        return new ResponseEntity<>(customerService.addCustomer(register),HttpStatus.CREATED);
     }
 
-    @GetMapping("/getAll")
-    public List<CustomerDto> getCustomer(){
-        return customerService.getCustomer();
+    @GetMapping("/get/{id}")
+    public ResponseEntity<CustomerDto> getById(@PathVariable Long id){
+        return new ResponseEntity<>(customerService.getById(id),HttpStatus.OK);
+    }
+    @GetMapping("/get")
+    public ResponseEntity<List<CustomerDto>> getAll(){
+        return new ResponseEntity<>(customerService.getAll(),HttpStatus.OK);
     }
 
-    @PutMapping("/update/{customerId}")
-    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Long customerId,@RequestBody CustomerDto dto){
-        return new ResponseEntity<>(customerService.updateCustomer(customerId,dto),HttpStatus.OK);
+    @PutMapping("update/{id}")
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Long id,@RequestBody CustomerDto dto){
+        return new ResponseEntity<>(customerService.updateCustomer(id,dto),HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{customerId}")
-    public ResponseEntity<Boolean> deleteCustomer(@PathVariable Long customerId){
-        return new ResponseEntity<>(customerService.deleteCustomer(customerId),HttpStatus.OK);
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Boolean> deleteCustomer(@PathVariable Long id){
+        return new ResponseEntity<>(customerService.deleteCustomer(id),HttpStatus.OK);
     }
+
 }
