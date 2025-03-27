@@ -1,6 +1,7 @@
 package com.project.dairy_management_system.Service.Customer;
 
 import com.project.dairy_management_system.Entity.Customer;
+import com.project.dairy_management_system.Exception.DuplicateEmailException;
 import com.project.dairy_management_system.Repository.CustomerRepository;
 import com.project.dairy_management_system.dto.CustomerDto;
 import com.project.dairy_management_system.dto.CustomerRegister;
@@ -24,7 +25,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 
     @Override
-    public CustomerDto addCustomer(CustomerRegister register) {
+    public CustomerDto addCustomer(CustomerRegister register) throws DuplicateEmailException {
         Customer customer = Customer.builder()
                 .firstName(register.fullName().split(" ")[0])
                 .lastName(register.fullName().split(" ")[1])
